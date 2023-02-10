@@ -1,101 +1,69 @@
 import 'package:flutter/material.dart';
-import 'package:audioplayers/audioplayers.dart';
+import 'dart:math';
 void main() {
   runApp(MaterialApp(
     home: Scaffold(
-      appBar: AppBar(title: Text('XYLOPHONE11'), centerTitle: true,),
-      body: Xylo(),
+      appBar: AppBar(title: Text('SUSHMITHA DICE APP'), centerTitle: true,),
+      body: DicePage(),
     ),
   ));
 }
-class Xylo extends StatefulWidget {
-  const Xylo({Key? key}) : super(key: key);
+class DicePage extends StatefulWidget {
+  const DicePage({Key? key}) : super(key: key);
   @override
-  _XyloState createState() => _XyloState();
+  _DicePageState createState() => _DicePageState();
 }
-class _XyloState extends State<Xylo> {
-  void playSound(int noteNumber) {
-    final player = AudioCache();
-    player.play("note$noteNumber.wav");
+class _DicePageState extends State<DicePage>{
+  int left = 1;
+  int right = 2;
+  void changeFace() {
+    setState(() {
+      left = Random().nextInt(6) + 1;
+      right = Random().nextInt(6) + 1;
+    });
   }
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Expanded(child: TextButton(
-          style: TextButton.styleFrom(
-              backgroundColor: Colors.white
-          ),
-          onPressed: () {
-            playSound(1);
-          },
-          child: Text('First'),
-        ),),Expanded(child: TextButton(
-          style: TextButton.styleFrom(
-              backgroundColor: Colors.lightGreen
-          ),
-          onPressed: () {
-            playSound(2);
-          },
-          child: Text('Second'),
-        ),),
-        Expanded(child: TextButton(
-          style: TextButton.styleFrom(
-              backgroundColor: Colors.black54
-          ),
-          onPressed: () {
-            playSound(3);
-          },
-          child: Text('Third'),
-        ),),
-        Expanded(child: TextButton(
-          style: TextButton.styleFrom(
-              backgroundColor: Colors.teal
-          ),
-          onPressed: () {
-            playSound(4);
-          },
-          child: Text('Fourth'),
-        ),),
-        Expanded(child: TextButton(
-          style: TextButton.styleFrom(
-              backgroundColor: Colors.amber
-          ),
-          onPressed: () {
-            playSound(5);
-          },
-          child: Text('Fifth'),
-        ),),
-        Expanded(child: TextButton(
-          style: TextButton.styleFrom(
-              backgroundColor: Colors.cyan
-          ),
-          onPressed: () {
-            playSound(6);
-          },
-          child: Text('Sixth'),
-        ),),
-        Expanded(child: TextButton(
-          style: TextButton.styleFrom(
-              backgroundColor: Colors.lime
-          ),onPressed: () {
-          playSound(7);
-        },
-          child: Text('Seventh'),
-        ),)
-      ],
-    );
+// TODO: implement build
+    return Center(
+      child: Container(
+        child: Row(
+          children: [
+            Expanded(
+              flex: 1,
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.deepOrange,
+                ),
+                child: Image.asset('images/dice$left.png'),
+                onPressed: () {
+                  changeFace();
+                },
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: TextButton(
+                style: TextButton.styleFrom(
+                  backgroundColor: Colors.amber,
+                ),
+                child: Image.asset('images/dice$right.png'),
+                onPressed: () {
+                  changeFace();
+                },
+              ),
+            ),
+          ],
+        ),
+      ),
+    ); // Building the body widget tree
   }
 }
 
 
-__________________________________________________________________________________________________________________
+________________________________________________________________________________________________________________
 
 
 
-audioplayers: ^0.19.1
-
-
-assets:
-    - assets/
+ assets:
+    - images/
